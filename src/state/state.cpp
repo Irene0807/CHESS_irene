@@ -13,7 +13,65 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  this->game_state = NONE;
+  std::vector<Move> all_actions;
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1 - this->player];
+  
+  int self=0, oppn=0;
+  int now_piece, oppn_piece;
+  for(int i=0; i<BOARD_H; i+=1){
+    for(int j=0; j<BOARD_W; j+=1){
+      if((now_piece=self_board[i][j])){
+        // std::cout << this->player << "," << now_piece << ' ';
+        switch (now_piece){
+          case 1: //pawn
+            self+=20;
+            break;
+          case 2: //rook
+            self+=50;
+            break;         
+          case 4: //bishop
+            self+=50;
+            break;
+          case 5: //queen
+            self+=100;
+            break;
+          case 3: //knight
+            self+=50;
+            break;
+          case 6: //king
+            self+=100;
+            break;
+        }
+      }
+      else if((now_piece=oppn_board[i][j])){
+        // std::cout << this->player << "," << now_piece << ' ';
+        switch (now_piece){
+          case 1: //pawn
+            oppn+=20;
+            break;
+          case 2: //rook
+            oppn+=50;
+            break;         
+          case 4: //bishop
+            oppn+=50;
+            break;
+          case 5: //queen
+            oppn+=100;
+            break;
+          case 3: //knight
+            oppn+=50;
+            break;
+          case 6: //king
+            oppn+=100;
+            break;
+        }
+      }
+    }
+  }
+  int ans = self - oppn;
+  return ans;
 }
 
 
