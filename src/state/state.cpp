@@ -1,73 +1,80 @@
 #include <iostream>
 #include <sstream>
 #include <cstdint>
+#include <climits>
 
 #include "./state.hpp"
 #include "../config.hpp"
-
 
 /**
  * @brief evaluate the state
  * 
  * @return int 
  */
+
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  this->game_state = NONE;
-  std::vector<Move> all_actions;
-  auto self_board = this->board.board[this->player];
-  auto oppn_board = this->board.board[1 - this->player];
+  //this->game_state = NONE;
+  //auto self_board = this->board.board[0];
+  //auto oppn_board = this->board.board[1];
   
   int self=0, oppn=0;
-  int now_piece, oppn_piece;
+  //int now_piece, oppn_piece;
   for(int i=0; i<BOARD_H; i+=1){
     for(int j=0; j<BOARD_W; j+=1){
-      if((now_piece=self_board[i][j])){
+      //int now_peice = self_board[i][j];
+      int now_piece = board.board[0][i][j];
+        
         // std::cout << this->player << "," << now_piece << ' ';
         switch (now_piece){
           case 1: //pawn
-            self+=20;
+            self+=10;
             break;
           case 2: //rook
             self+=50;
             break;         
           case 4: //bishop
-            self+=50;
+            self+=30;
             break;
           case 5: //queen
-            self+=100;
+            self+=90;
             break;
           case 3: //knight
-            self+=50;
+            self+=30;
             break;
           case 6: //king
-            self+=100;
+            self+=100000;
+            break;
+          default:
             break;
         }
-      }
-      else if((now_piece=oppn_board[i][j])){
+
+      //int oppn_peice = oppn_board[i][j];
+      int oppn_piece = board.board[1][i][j];
         // std::cout << this->player << "," << now_piece << ' ';
-        switch (now_piece){
+
+        switch (oppn_piece){
           case 1: //pawn
-            oppn+=20;
+            oppn+=10;
             break;
           case 2: //rook
             oppn+=50;
-            break;         
+            break;        
           case 4: //bishop
-            oppn+=50;
+            oppn+=30;
             break;
           case 5: //queen
-            oppn+=100;
+            oppn+=90;
             break;
           case 3: //knight
-            oppn+=50;
+            oppn+=30;
             break;
           case 6: //king
-            oppn+=100;
+            oppn+=100000;
+            break;
+          default:
             break;
         }
-      }
     }
   }
   int ans = self - oppn;
