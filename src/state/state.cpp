@@ -18,66 +18,63 @@ int State::evaluate(){
   //auto self_board = this->board.board[0];
   //auto oppn_board = this->board.board[1];
   
-  int self=0, oppn=0;
-  //int now_piece, oppn_piece;
+  int white=0, black=0;
   for(int i=0; i<BOARD_H; i+=1){
     for(int j=0; j<BOARD_W; j+=1){
-      //int now_peice = self_board[i][j];
-      int now_piece = board.board[0][i][j];
+      int white_piece = board.board[0][i][j];
         
-        // std::cout << this->player << "," << now_piece << ' ';
-        switch (now_piece){
+        switch (white_piece){
           case 1: //pawn
-            self+=10;
+            white+=10;
             break;
           case 2: //rook
-            self+=50;
+            white+=50;
             break;         
           case 4: //bishop
-            self+=30;
+            white+=30;
             break;
           case 5: //queen
-            self+=90;
+            white+=90;
             break;
           case 3: //knight
-            self+=30;
+            white+=30;
             break;
           case 6: //king
-            self+=100000;
+            white+=100000;
             break;
           default:
             break;
         }
 
       //int oppn_peice = oppn_board[i][j];
-      int oppn_piece = board.board[1][i][j];
+      int black_piece = board.board[1][i][j];
         // std::cout << this->player << "," << now_piece << ' ';
 
-        switch (oppn_piece){
+        switch (black_piece){
           case 1: //pawn
-            oppn+=10;
+            black+=10;
             break;
           case 2: //rook
-            oppn+=50;
+            black+=50;
             break;        
           case 4: //bishop
-            oppn+=30;
+            black+=30;
             break;
           case 5: //queen
-            oppn+=90;
+            black+=90;
             break;
           case 3: //knight
-            oppn+=30;
+            black+=30;
             break;
           case 6: //king
-            oppn+=100000;
+            black+=100000;
             break;
           default:
             break;
         }
     }
   }
-  int ans = self - oppn;
+  int ans = white - black;
   return ans;
 }
 
